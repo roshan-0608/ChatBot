@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/chatbot-project/'
+  base: 'https://github.com/roshan-0608/ChatBot'
 })
