@@ -13,7 +13,9 @@ function App() {
       'messages',
       JSON.stringify(chatMessages)
     );
-  }, [chatMessages]);
+  }, [chatMessages]); 
+
+  
 
   // const [chatMessages, setChatMessages] = array;
   // const chatMessages = array[0];
