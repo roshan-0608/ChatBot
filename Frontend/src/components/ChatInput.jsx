@@ -1,18 +1,27 @@
 import {useState} from 'react'
-import {Chatbot} from 'supersimpledev'
+import {createChatSession} from '../services/chatSession.service.js'
+import {sendMessage as sendMessageAPI} from '../services/message.service.js'
 import LoadingSpinner from '../assets/loading-spinner.gif'
 import './ChatInput.css'
 
-export function ChatInput({ chatMessages, setChatMessages }) {
+export function ChatInput({ chatMessages, setChatMessages, chatSessionId, setChatSessionId  }) {
     const [inputText, setInputText] = useState('');
     const [isloading, setIsLoading] = useState(false);
     function saveInputText(event) {
         setInputText(event.target.value);
     }
 
+
     async function sendMessage() {
         if(isloading || inputText === ""){
         return;
+        }
+
+        let currentChatSessionId = chatSessionId;
+        if (!currentChatSessionId) {
+            const chat = await createChatSession();
+            currentChatSessionId = chat.data._id;
+            setChatSessionId(currentChatSessionId);
         }
         
         setInputText('');
@@ -36,17 +45,27 @@ export function ChatInput({ chatMessages, setChatMessages }) {
         }
         ]);
 
-        const response = await Chatbot.getResponseAsync(inputText);
-        setChatMessages([
-        ...newChatMessages,
-        {
-            message: response,
-            sender: 'robot',
-            id: crypto.randomUUID()
+        try {
+            const response = await sendMessageAPI(
+                currentChatSessionId,
+                inputText
+            );
+            const aiMessage = response.data.assistantMessage.content;
+            setChatMessages([
+                ...newChatMessages,
+                {
+                    message: aiMessage,
+                    sender: "robot",
+                    id: crypto.randomUUID()
+                }
+            ]);
         }
-        ]);
-
-        setIsLoading(false);
+        catch(error){
+            console.error(error);
+        }
+        finally{
+            setIsLoading(false);
+        }
     }
 
     function handlekeydown(event){
@@ -60,8 +79,10 @@ export function ChatInput({ chatMessages, setChatMessages }) {
 
     const clearChat = () => {
         setChatMessages([]);
+        setChatSessionId(null);
+        localStorage.removeItem("messages");
+        localStorage.removeItem("chatSessionId");
     }
-
     return (
         <div className="chat-input-container">
         <input
