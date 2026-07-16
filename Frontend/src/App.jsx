@@ -8,12 +8,25 @@ function App() {
     JSON.parse(localStorage.getItem('messages')) || []
   );
 
+  const [chatSessionId, setChatSessionId] = useState(
+    localStorage.getItem("chatSessionId") || null
+);
+
   useEffect(() => {
     localStorage.setItem(
       'messages',
       JSON.stringify(chatMessages)
     );
   }, [chatMessages]); 
+
+  useEffect(() => {
+    if (chatSessionId) {
+        localStorage.setItem(
+            "chatSessionId",
+            chatSessionId
+        );
+    }
+}, [chatSessionId]);
 
   
 
@@ -30,6 +43,8 @@ function App() {
       <ChatInput
         chatMessages={chatMessages}
         setChatMessages={setChatMessages}
+        chatSessionId={chatSessionId}
+        setChatSessionId={setChatSessionId}
       />
     </div>
   );
