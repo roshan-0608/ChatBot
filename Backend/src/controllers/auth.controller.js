@@ -2,10 +2,17 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
+import jwt from "jsonwebtoken";
+
+// In production the frontend and backend live on different HTTPS domains,
+// so cookies must be Secure + SameSite=None to be sent cross-site.
+// Locally (HTTP) we use Lax so cookies still work without HTTPS.
+const isProduction = process.env.NODE_ENV === "production";
 
 const options = {
     httpOnly: true,
-    secure: false, // Change to true after deployment (HTTPS)
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
 };
 
 

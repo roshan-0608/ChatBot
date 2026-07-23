@@ -1,5 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --color-bg: #f8f9fc;
+  --color-surface: #ffffff;
+  --color-border: #e2e3ec;
+  --color-text: #101322;
+  --color-text-muted: #6b7085;
+  --color-accent: #3646d6;
+  --color-accent-hover: #2b3ad1;
+  --color-accent-soft: rgba(54, 70, 214, 0.08);
+  --color-danger: #d13a3a;
+  --gradient-accent: linear-gradient(135deg, #8f7dfb 0%, #4d3fe0 100%);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 30px;
+
+  --shadow-soft: 0 4px 16px rgba(16, 24, 40, 0.06);
+  --shadow-medium: 0 8px 30px rgba(16, 24, 40, 0.1);
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
 body {
-  font-family: Arial;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-bg);
 }

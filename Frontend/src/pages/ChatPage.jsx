@@ -1,59 +1,15 @@
-import { useState, useEffect } from 'react'
-import {ChatMessages} from '../components/Chatmessages.jsx'
-import { ChatInput} from '../components/ChatInput.jsx'
-import '../App.css'
+import { ChatProvider } from '../context/ChatContext.jsx'
+import { Sidebar } from '../components/sidebar/Sidebar.jsx'
+import { ChatWindow } from '../components/chat/ChatWindow.jsx'
+import './ChatPage.css'
 
 export default function ChatPage() {
-  const [chatMessages, setChatMessages] = useState(
-    JSON.parse(localStorage.getItem('messages')) || []
-  );
-
-  const [chatSessionId, setChatSessionId] = useState(
-    localStorage.getItem("chatSessionId") || null
-);
-
-  useEffect(() => {
-    localStorage.setItem(
-      'messages',
-      JSON.stringify(chatMessages)
-    );
-  }, [chatMessages]); 
-
-  useEffect(() => {
-    if (chatSessionId) {
-        localStorage.setItem(
-            "chatSessionId",
-            chatSessionId
-        );
-    }
-}, [chatSessionId]);
-
-  
-
-  // const [chatMessages, setChatMessages] = array;
-  // const chatMessages = array[0];
-  // const setChatMessages = array[1];
-
   return (
-    <div className="app-container">
-      <p className = "para"> {chatMessages.length === 0 ? ("Welcome to the chatbot project! Send a message using the textbox below.") : ""} </p>
-      <ChatMessages
-        chatMessages={chatMessages}
-      />
-      <ChatInput
-        chatMessages={chatMessages}
-        setChatMessages={setChatMessages}
-        chatSessionId={chatSessionId}
-        setChatSessionId={setChatSessionId}
-      />
-    </div>
+    <ChatProvider>
+      <div className="chat-layout">
+        <Sidebar />
+        <ChatWindow />
+      </div>
+    </ChatProvider>
   );
 }
-
-
-
-// export default function ChatPage() {
-//     return (
-//         <h1>Chat Page</h1>
-//     );
-// }

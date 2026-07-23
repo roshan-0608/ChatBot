@@ -1,0 +1,33 @@
+.code-block {
+  margin: 0 0 14px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #282c34;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 16px;
+  background: #21252b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-block-lang {
+  font-size: 12px;
+  font-weight: 600;
+  color: #abb2bf;
+  letter-spacing: 0.02em;
+}
+
+.code-block-copy {
+  color: #abb2bf;
+}
+
+/* The highlighted body scrolls horizontally; long lines are not wrapped. */
+.code-block pre {
+  margin: 0 !important;
+  overflow-x: auto;
+}

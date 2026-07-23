@@ -1,0 +1,90 @@
+.message-input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.message-input {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 8px 8px 8px 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-soft);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.message-input:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft), var(--shadow-soft);
+}
+
+.message-input-textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text);
+  padding: 9px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.message-input-textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input-attach-btn,
+.input-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.input-attach-btn {
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.input-send-btn {
+  background: var(--gradient-accent);
+  color: #fff;
+}
+
+.input-send-btn:hover:not(:disabled) {
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-1px);
+}
+
+.input-send-btn:disabled {
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.message-input-hint {
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.message-input-hint strong {
+  font-weight: 600;
+  color: var(--color-text-muted);
+}

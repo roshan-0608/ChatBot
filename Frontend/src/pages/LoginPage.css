@@ -149,6 +149,18 @@
   text-decoration: underline;
 }
 
+.form-error {
+  margin: -4px 0 0;
+  font-size: 13px;
+  color: #d13a3a;
+}
+
+.form-success {
+  margin: -4px 0 0;
+  font-size: 13px;
+  color: #1a8a4a;
+}
+
 .login-button {
   margin-top: 6px;
   width: 100%;

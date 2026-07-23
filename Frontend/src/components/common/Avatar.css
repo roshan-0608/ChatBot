@@ -1,0 +1,20 @@
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.avatar-robot {
+  background: var(--color-accent);
+}
+
+.avatar-user {
+  background: var(--gradient-accent);
+}

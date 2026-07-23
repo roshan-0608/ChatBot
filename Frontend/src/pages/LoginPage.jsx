@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useAuth } from "../context/auth-context.js";
 import "./LoginPage.css";
 
 // Simple inline icon components (no external image files needed)
@@ -48,11 +50,28 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(false);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
+  const justRegistered = Boolean(location.state?.registered);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Wire this up to your auth logic
-    console.log({ email, password, remember });
+    setError("");
+    setIsSubmitting(true);
+    try {
+      await login({ email, password });
+      navigate("/chat", { replace: true });
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Invalid email or password"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -69,6 +88,10 @@ export default function LoginPage() {
 
             <h1 className="login-title">Welcome Back!!</h1>
             <p className="login-subtitle">Sign in to continue your conversations.</p>
+
+            {justRegistered && (
+              <p className="form-success">Account created — please log in.</p>
+            )}
 
             <form onSubmit={handleSubmit} className="login-form">
               <div className="input-group">
@@ -112,7 +135,11 @@ export default function LoginPage() {
                 <a href="#forgot" className="forgot-link">Forgot password</a>
               </div>
 
-              <button type="submit" className="login-button">Login</button>
+              {error && <p className="form-error">{error}</p>}
+
+              <button type="submit" className="login-button" disabled={isSubmitting}>
+                {isSubmitting ? "Logging in..." : "Login"}
+              </button>
             </form>
 
             <div className="divider">
@@ -131,7 +158,7 @@ export default function LoginPage() {
               </button>
             </div> */}
             <p className="register-text">
-                Don't have an account? <a href="#register" className="register-link">Create account</a>
+                Don't have an account? <Link to="/register" className="register-link">Create account</Link>
             </p>
           </div>
         </div>

@@ -7,6 +7,10 @@ import messageRouter from "./routes/message.routes.js";
 
 const app = express();
 
+// Render (and most hosts) terminate HTTPS at a proxy in front of the app.
+// Trusting the proxy lets Express treat requests as secure so Secure cookies work.
+app.set("trust proxy", 1);
+
 // CORS Configuration
 app.use(
     cors({

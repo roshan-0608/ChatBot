@@ -8,3 +8,9 @@ export const sendMessage = async (chatSessionId, content) => {
 
     return response.data;
 };
+
+export const getMessages = async (chatSessionId) => {
+    const response = await api.get(`/message/${chatSessionId}`);
+
+    return response.data;
+};
