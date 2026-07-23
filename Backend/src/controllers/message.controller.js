@@ -1,4 +1,4 @@
-import { Message } from "../models/message.model.js";
+import { Message } from "../models/Message.model.js";
 import { ChatSession } from "../models/chatSession.model.js";
 
 import { asyncHandler } from "../utils/asyncHandler.js";
